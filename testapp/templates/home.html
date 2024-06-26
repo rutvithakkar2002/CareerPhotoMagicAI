@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerPhotoMagicAI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        header .logo h1 {
+            margin: 0;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .welcome-section h2 {
+            color: #007bff;
+        }
+
+        .upload-section {
+            margin-top: 20px;
+        }
+
+        .upload-section label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .upload-section input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .gallery-section {
+            margin-top: 40px;
+        }
+
+        .iconic-images, .generated-images {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .iconic-images img, .generated-images img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .name-input {
+            margin: 20px 0;
+        }
+
+        .name-input label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .name-input input {
+            padding: 8px;
+            width: 200px;
+        }
+
+        .messages {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .messages.success {
+            background-color: #4CAF50;
+        }
+
+        .messages.error {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="static/images/logo2.png" alt="Logo">
+            <h1>CareerPhotoMagicAI</h1>
+        </div>
+        <nav>
+            <a href="#">Home</a>
+        </nav>
+    </header>
+    <main>
+        <section class="welcome-section">
+            <h2>Welcome to CareerPhotoMagic</h2>
+            <p>Transform your casual photos into professional images perfect for your CV and LinkedIn profile.</p>
+            {% if success %}
+                <div class="messages success">{{ success }}</div>
+                <div class="messages success">{{ message }}</div>
+            {% elif error %}
+                <div class="messages error">{{ error }}</div>
+            {% endif %}
+            {% if not success %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="name-input">
+                    <label for="name">Enter your name:</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="upload-section">
+                    <label for="upload">Select Images (at least 5):</label>
+                    <input type="file" id="upload" name="upload" multiple required>
+                    <button type="submit">Upload</button>
+                </div>
+            </form>
+            {% endif %}
+        </section>
+        <section class="gallery-section">
+            <h3>Share some of your iconic images, like the ones shown here.</h3>
+            <div class="iconic-images">
+                <!-- Add your images here -->
+                <img src="static/images/1.jpg" alt="Image 1">
+                <img src="static/images/2.jpg" alt="Image 2">
+                <img src="static/images/3.jpg" alt="Image 3">
+                <img src="static/images/4.jpg" alt="Image 4">
+                <img src="static/images/6.jpg" alt="Image 6">
+            </div>
+            <h3>And get your personalized AI generated images like these ones</h3>
+            <div class="generated-images">
+                <!-- Add your generated images here -->
+                <img src="static/images/op5.png" alt="Image 1">
+                <img src="static/images/op6.png" alt="Image 2">
+                <img src="static/images/op7.png" alt="Image 3">
+                <img src="static/images/op8.png" alt="Image 4">
+                <img src="static/images/op9.png" alt="Image 6">
+            </div>
+        </section>
+    </main>
+</body>
+</html>
